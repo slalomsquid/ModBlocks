@@ -1,0 +1,64 @@
+<h1>Console..?</h1>
+
+<div class="scroll-box" id="commands"></div>
+
+<input id="input" placeholder="Command to run..." class="input"></input>
+
+<style>
+.scroll-box {
+  width: 75%;
+  height: 75%;
+  overflow: auto;   /* adds scrollbars when needed */
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+.input {
+    width: 75%;
+}
+</style>
+
+<script>
+
+    // If errors start happening put this in
+    // window.addEventListener("DOMContentLoaded", () => {
+    // )};
+
+    // Get the input field element
+    const start = Date.now();
+
+    const input = document.getElementById("input");
+
+    input.focus();
+
+    const ws = new WebSocket("ws://127.0.0.1:8000");
+
+    ws.addEventListener("open", () => {
+        console.log("Connected to server");
+    });
+
+    // No need to wait for dom load yet
+    ws.addEventListener("message", (event) => {
+        console.log("Server:", event.data);
+        const box = document.getElementById("commands");
+        const msg = JSON.parse(event.data);
+        box.innerHTML += String(Date.now() - start) + ": " + msg.data + "<br>";
+        box.scrollTop = box.scrollHeight;
+    });
+
+    // Add an event listener for the 'keydown' event
+    input.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        const box = document.getElementById("commands");
+        const value = input.value.toLowerCase();
+        box.innerHTML += String(Date.now() - start) + ": " + value + "<br>";
+        if (ws.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({ type: 0, password: "Admin", command: value }));        // send what user typed
+            console.log("Sent:", value);
+            input.value = "";
+        } else {
+            box.innerHTML += String(Date.now() - start) + ": " + "Socket closed... Try reloading" + "<br>";
+        }
+    }
+    });
+</script>

@@ -1,0 +1,8 @@
+{
+  "world_height": 10,
+  "sea_level": -5,
+  "max_floor_height": 8,
+  "min_floor_height": 2,
+  "surface_block": "grass",
+  "ground_block": "stone"
+}

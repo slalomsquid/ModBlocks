@@ -1,0 +1,12 @@
+{
+  "LUT": {
+    "air": "0",
+    "stone": "1",
+    "bricks": "2",
+    "grass": "3",
+    "dirt": "4"
+  },
+  "chunks": {},
+  "origin_chunk": "0",
+  "players": {}
+}

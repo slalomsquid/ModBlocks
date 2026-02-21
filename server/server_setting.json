@@ -1,0 +1,10 @@
+{
+  "WS_PORT": 8000,
+  "WebInterface": {
+    "Enabled": true,
+    "Port": 8080,
+    "UI": "ui/index.html",
+    "Username": "Admin",
+    "Password": "Admin"
+  }
+}
