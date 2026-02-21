@@ -1,0 +1,3 @@
+[submodule "server/SlalomJsUtils"]
+	path = server/SlalomJsUtils
+	url = https://github.com/slalomsquid/SalaomJsUtils.git
